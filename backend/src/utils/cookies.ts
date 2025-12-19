@@ -4,9 +4,9 @@ import { env } from "../config/env.js";
 export function setAuthCookie(res: Response, token: string) {
   res.cookie(env.COOKIE_NAME, token, {
     httpOnly: true,
+    secure: true,
     sameSite: "none",
     path: "/",
-    secure: env.SECURE_COOKIE,
     maxAge: 7 * 24 * 60 * 60 * 1000
   });
 }
@@ -14,7 +14,8 @@ export function setAuthCookie(res: Response, token: string) {
 export function clearAuthCookie(res: Response) {
   res.clearCookie(env.COOKIE_NAME, {
     httpOnly: true,
+    secure: true,
     sameSite: "none",
-    secure: env.SECURE_COOKIE
+    path: "/"
   });
 }

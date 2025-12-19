@@ -18,6 +18,7 @@ async function main() {
 
   const app = express();
   app.set("trust proxy", 1);
+  app.use(cookieParser());
   const server = http.createServer(app);
 
   const io = new Server(server, {
