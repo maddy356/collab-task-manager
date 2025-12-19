@@ -5,6 +5,7 @@ export function setAuthCookie(res: Response, token: string) {
   res.cookie(env.COOKIE_NAME, token, {
     httpOnly: true,
     sameSite: "none",
+    path: "/",
     secure: env.SECURE_COOKIE,
     maxAge: 7 * 24 * 60 * 60 * 1000
   });
