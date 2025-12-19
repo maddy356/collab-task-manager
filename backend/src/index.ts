@@ -1,22 +1,23 @@
+import cookieParser from "cookie-parser";
+import cors from "cors";
 import "dotenv/config";
 import express from "express";
-import cors from "cors";
-import cookieParser from "cookie-parser";
 import http from "http";
 import { Server } from "socket.io";
 
-import { env } from "./config/env.js";
 import { connectDB } from "./config/db.js";
+import { env } from "./config/env.js";
 import { authRoutes } from "./routes/auth.routes.js";
-import { userRoutes } from "./routes/user.routes.js";
 import { notificationRoutes } from "./routes/notification.routes.js";
 import { makeTaskRoutes } from "./routes/task.routes.js";
+import { userRoutes } from "./routes/user.routes.js";
 import { initSocket } from "./socket/socket.js";
 
 async function main() {
   await connectDB();
 
   const app = express();
+  app.set("trust proxy", 1);
   const server = http.createServer(app);
 
   const io = new Server(server, {
